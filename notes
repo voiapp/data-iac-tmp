@@ -1,0 +1,44 @@
+Terraform notes
+
+Why new state? Scaling issues.
+
+PR is merged and applied in voi-stage, voi-dev, voi-load. How much should we consider this?
+Do we need to build a scaling solution or can we wait with t a bit?
+
+You cannot run Github actions in parallel, https://github.community/t/steps-in-parallel/16343.
+
+How do we set default values when creating objects, so we dont create a bunch of "dev.json" stacks? We would like it to be named as the folder.
+something similar to tableau.prod and tableau.dev
+
+setting up pulumi:
+brew install pulumi
+if you need in python: pip install pulumi
+
+if you need to authorize pulumi to login through the gs://voi-data-pulumi-state: (https://www.pulumi.com/registry/packages/gcp/installation-configuration/)
+1- gcloud config set project voi-data-warehouse-stage
+2-gcloud auth application-default login
+
+
+
+
+
+
+About the secrets:
+We do need the secrets for handling stuff. It seems we have to use GoogleKMS for keeping secrets.
+https://www.pulumi.com/docs/intro/concepts/secrets/#:~:text=Pulumi%20supports%20the%20following%20encryption,Cloud%20Key%20Management%20Service%20(KMS)
+* Do we need different KMS paths for different stages (i.e. one for Develop, one for Prod) or we can use  the same KMS and have different envs.
+
+
+
+Some notes from Pulumi documentation:
+
+Pulumi projects and stacks let you organize Pulumi code. Consider a Pulumi project to be analogous
+to a GitHub repo—a single place for code—and a stack to be an instance of that code with a separate configuration.
+For instance, Project Foo may have multiple stacks for different development environments (Dev, Test, or Prod), or
+perhaps for different cloud configurations (geographic region for example). See Organizing Projects and Stacks for
+some best practices on organizing your Pulumi projects and stacks.
+
+
+Stacks are exactly different phases of project (dev, stage,prod) i.e. for our snowflake project,
+we will have snowflake-project.dev.yaml and snowflake-project.prod.yaml
+

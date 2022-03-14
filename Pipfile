@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+pulumi = "~=3.25.1"
+pulumi-gcp = "~=6.9.0"
+typer = "~= 0.4.0"
+
+[dev-packages]
+black = "==21.11b1"
+isort = "~=5.10.1"
+mypy = "~=0.910"
+pylint = "~= 2.11.1"
+pytest = "~= 6.2.5"
+pytest-cov = "~=3.0.0"
+types-PyYAML = "~=6.0.1"
+
+[requires]
+python_version = "3.8"
